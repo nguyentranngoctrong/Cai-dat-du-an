@@ -8,8 +8,8 @@ module.exports = (app) => {
     router.post("/", contacts.create);
     // Delete all contacts
     router.delete("/", contacts.deleteAll);
-   // Retrieve alL favorite contacts
-    router.get("/favorite", contacts.findAllFavorite);
+   // Retrieve alL completed contacts
+    router.get("/completed", contacts.findAllFavorite);
    // Retrieve a single contact with id
     router.get("/:id", contacts.findOne);
    // Update a contact with id

@@ -1,18 +1,19 @@
 const mongoose = require("mongoose");
 
 const schema = mongoose.Schema({
-    name: {
+    userId: {
         type: String,
         required: [true, "Contact name is required"],
     },
-    email: {
+    address: String,
+    title: {
         type: String,
         trim: true,
         lowercase: true,
     },
-    address: String,
-    phone: String,
-    favorite: Boolean,
+    
+    //id: String,
+    completed: Boolean,
 }, { timestamps: true });
 
 //Replace _id with id and remove _V

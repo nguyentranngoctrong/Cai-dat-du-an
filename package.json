@@ -1,12 +1,12 @@
 {
-  "name": "lap1vs2",
+  "name": "backend",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "script": {
     "start": "nodemon server.js"
   },
-  "author": "Nguyen Tran Ngoc Trong",
+  "author": "hophuc",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

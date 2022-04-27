@@ -6,16 +6,16 @@ const Contact = require("../models/contact.model");
 
 exports.create = async (req, res, next ) => {
     // Validate request 
-    if (!req.body.name){
+    if (!req.body.userId){
         return next(new BadRequestError(400, "Name can not be empty"));
     }
     //Create a contact 
     const contact = new Contact({
-        name: req.body.name,
-        email: req.body.email,
+        userId: req.body.userId,
         address: req.body.address,
-        phone: req.body.phone,
-        favorite: req.body.favorite === true,
+        title: req.body.title,
+        id: req.body.id,
+        completed: req.body.completed === true,
     });
     // Save contact in the database 
     const [error, document] = await handLePromise(contact.save());
@@ -28,9 +28,9 @@ exports.create = async (req, res, next ) => {
 // Retrieve all contacts of a user from the database 
 exports.findAll = async (req, res, next) => {
     const condition = { };
-    const { name } = req.query;
-    if (name) {
-        condition.name = { $regex: new RegExp(name), $options: "i"};
+    const { userId } = req.query;
+    if (userId) {
+        condition.userId = { $regex: new RegExp(userId), $options: "i"};
     }
 
     const [error ,documents] = await handLePromise(Contact.find(condition));
@@ -103,13 +103,13 @@ exports.delete = async (req, res, next) => {
 
     return res.send({ message: "Contact was deleted successfully", });
 };
-//Find all favorite contacts of a user
+//Find all completed contacts of a user
 exports.findAllFavorite = async (req, res, next ) =>  {
     const [error, documents] = await handLePromise (
-        Contact.find({favorite: true, })
+        Contact.find({completed: true, })
     );
     if (error){
-        return next(new BadRequestError(500, "An error occurred while retrieving favorite contacts"));
+        return next(new BadRequestError(500, "An error occurred while retrieving completed contacts"));
     }
 
     return res.send(documents);
